@@ -4,11 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node --transpile-only src/index.ts"
+    "start": "node --transpile-only src/index.ts"
   },
   "dependencies": {
     "dotenv": "^16.3.1",
-    "instagram-private-api": "^1.45.3",
     "lodash": "^4.17.21",
     "prettier": "^3.1.0",
     "typescript": ">=4.7"
