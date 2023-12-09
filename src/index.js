@@ -213,12 +213,13 @@
 
 		showActionsMenuButton() {
 			console.debug("showActionsMenuButton");
-			this.root.dispatchEvent(new MouseEvent("mousemove", { bubbles: true }));
-			this.root.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
-			this.root.dispatchEvent(new MouseEvent("mousenter", { bubbles: true }));
-			this.root.addEventListener("mousemove", e => e.preventDefault());
-			this.root.addEventListener("mouseover", e => e.preventDefault());
-			this.root.addEventListener("mousenter", e => e.preventDefault());
+			var child=this.root.querySelector('[role="row"]')
+			child.dispatchEvent(new MouseEvent("mousemove", { bubbles: true }));
+			child.dispatchEvent(new MouseEvent("mouseover", { bubbles: true }));
+			child.dispatchEvent(new MouseEvent("mousenter", { bubbles: true }));
+			child.addEventListener("mousemove", e => e.preventDefault());
+			child.addEventListener("mouseover", e => e.preventDefault());
+			child.addEventListener("mousenter", e => e.preventDefault());
 		}
 
 		hideActionMenuButton() {
