@@ -211,7 +211,7 @@
     showActionsMenuButton() {
       console.debug('showActionsMenuButton')
       const row = this.root.querySelector('[role=row]')
-      for (child of [this.root, row]) {
+      for (const child of [this.root, row]) {
         if (child) {
           child.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }))
           child.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }))
@@ -223,7 +223,7 @@
     hideActionMenuButton() {
       console.debug('hideActionMenuButton')
       const row = this.root.querySelector('[role=row]')
-      for (child of [this.root, row]) {
+      for (const child of [this.root, row]) {
         if (child) {
           child.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }))
           child.dispatchEvent(new MouseEvent('mouseout', { bubbles: true }))
