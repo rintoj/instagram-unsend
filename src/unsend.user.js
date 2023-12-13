@@ -1,13 +1,10 @@
 // ==UserScript==
 
-// @name				instagram-dm-unsender
+// @name				unsend-instagram
 // @license				MIT
-// @copyright				Copyright (c) 2023, Romain Lebesle <oss@thoughtsunificator.me> (https://thoughtsunificator.me)
-// @namespace				https://thoughtsunificator.me/
-// @author				Romain Lebesle <oss@thoughtsunificator.me> (https://thoughtsunificator.me)
-// @homepageURL				https://thoughtsunificator.me/
-// @supportURL				https://thoughtsunificator.me/
-// @contributionURL				https://thoughtsunificator.me/
+// @copyright				
+// @namespace				https://videntia.in/
+// @author				
 // @icon				https://www.instagram.com/favicon.ico
 // @version				0.4.41
 // @description				Simple script to unsend all DMs in a thread on instagram.com
