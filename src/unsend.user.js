@@ -461,7 +461,7 @@
 
   const { uiElement, unsendThreadMessagesButton, loadThreadMessagesButton } = createUIElement()
 
-  const idmu = new IDMU(window)
+  let idmu = new IDMU(window)
 
   class UnsendThreadMessagesBatchStrategy {
     #batchSize
@@ -537,6 +537,7 @@
     console.log("Loaded threads:", threads.length)
     for(var i=0;i<threads.length; i++){
       await selectMessageThread(threads[i])
+      idmu = new IDMU(window);
 		  await new UnsendThreadMessagesBatchStrategy(localStorage.getItem("IDMU_BATCH_SIZE") || 1).run();
     }
     unsendThreadMessagesButton.disabled=false;
