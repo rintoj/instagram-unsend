@@ -498,7 +498,7 @@
 
    async function selectMessageThread(thread){
     thread.dispatchEvent(new MouseEvent('click',{bubbles:true}))
-    return new Promise(resolve => setTimeout(resolve, 2000));
+    return new Promise(resolve => setTimeout(resolve, 5000));
   }
 
 
