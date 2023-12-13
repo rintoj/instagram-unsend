@@ -530,6 +530,7 @@
 
   unsendThreadMessagesButton.addEventListener('click', async () => {
     unsendThreadMessages.disabled=true;
+    unsendThreadMessages.value = 'Processing..'
     console.log('unsendThreadMessagesButton click')
     const threads = await loadMessageThreads();
     console.log("Loaded threads:", threads.length)
@@ -538,6 +539,7 @@
 		  await new UnsendThreadMessagesBatchStrategy(localStorage.getItem("IDMU_BATCH_SIZE") || 1).run();
     }
     unsendThreadMessages.disabled=false;
+    unsendThreadMessages.value ='Unsend all DMs'
     alert('IDMU: Finished')
   })
 
