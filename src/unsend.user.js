@@ -529,17 +529,19 @@
   }
 
   unsendThreadMessagesButton.addEventListener('click', async () => {
-    unsendThreadMessages.disabled=true;
-    unsendThreadMessages.value = 'Processing..'
+    unsendThreadMessagesButton.disabled=true;
     console.log('unsendThreadMessagesButton click')
+    applyButtonStyle(unsendThreadMessagesButton, BUTTON_STYLE.SECONDARY);
+    unsendThreadMessagesButton.innerHTML = "Processing..";
     const threads = await loadMessageThreads();
     console.log("Loaded threads:", threads.length)
     for(var i=0;i<threads.length; i++){
       await selectMessageThread(threads[i])
 		  await new UnsendThreadMessagesBatchStrategy(localStorage.getItem("IDMU_BATCH_SIZE") || 1).run();
     }
-    unsendThreadMessages.disabled=false;
-    unsendThreadMessages.value ='Unsend all DMs'
+    unsendThreadMessagesButton.disabled=false;
+    applyButtonStyle(unsendThreadMessagesButton, BUTTON_STYLE.PRIMARY);
+    unsendThreadMessagesButton.innerHTML ='Unsend all DMs'
     alert('IDMU: Finished')
   })
 
