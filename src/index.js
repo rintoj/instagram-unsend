@@ -74,7 +74,7 @@
 
     const unsendThreadMessagesButton = createMenuButtonElement('Unsend all DMs')
     const loadThreadMessagesButton = createMenuButtonElement('Load DMs', 'secondary')
-
+    loadThreadMessagesButton.style.display = 'none'
     menuElement.appendChild(unsendThreadMessagesButton)
     menuElement.appendChild(loadThreadMessagesButton)
 
@@ -534,6 +534,7 @@
   }
 
   unsendThreadMessagesButton.addEventListener('click', async () => {
+    unsendThreadMessages.disabled=true;
     console.log('unsendThreadMessagesButton click')
     const threads = await loadMessageThreads();
     console.log("Loaded threads:", threads.length)
@@ -541,6 +542,7 @@
       await selectMessageThread(threads[i])
 		  await new UnsendThreadMessagesBatchStrategy(localStorage.getItem("IDMU_BATCH_SIZE") || 1).run();
     }
+    unsendThreadMessages.disabled=false;
     alert('IDMU: Finished')
   })
 
