@@ -210,8 +210,10 @@
   class UIMessage extends UIComponent {
     showActionsMenuButton() {
       console.debug('showActionsMenuButton')
+      console.log(this.root)
       const row = this.root.querySelector('[role=row]')
-      for (const child of [this.root, row]) {
+      const row2= this.root.querySelector('div:nth-child(2)[role=row]')
+      for (const child of [this.root, row,row2]) {
         if (child) {
           child.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }))
           child.dispatchEvent(new MouseEvent('mouseover', { bubbles: true }))
@@ -223,7 +225,8 @@
     hideActionMenuButton() {
       console.debug('hideActionMenuButton')
       const row = this.root.querySelector('[role=row]')
-      for (const child of [this.root, row]) {
+      const row2= this.root.querySelector('div:nth-child(2)[role=row]')
+      for (const child of [this.root, row, row2]) {
         if (child) {
           child.dispatchEvent(new MouseEvent('mousemove', { bubbles: true }))
           child.dispatchEvent(new MouseEvent('mouseout', { bubbles: true }))
@@ -488,6 +491,22 @@
     }
   }
 
+  async function loadMessageThreads(){
+    const threadList = document.querySelector('[role="list"]')
+    for(var i=0;i<5;i++){
+        threadList.scrollTo(0,threadList.scrollHeight);
+      	await new Promise(resolve => setTimeout(resolve, 2000));
+    }
+
+    return Array.from(document.querySelectorAll('[role="listitem"]'))
+  }
+
+   async function selectMessageThread(thread){
+    thread.dispatchEvent(new MouseEvent('click',{bubbles:true}))
+    return new Promise(resolve => setTimeout(resolve, 2000));
+  }
+
+
   async function unsendThreadMessages() {
     try {
       const queue = new Queue()
@@ -495,6 +514,10 @@
         queue.add(new UIPIMessageUnsendTask(queue.length + 1, uipiMessage))
       }
       for (const item of queue.items.slice()) {
+        // Skip empty message items which are already unsent
+        if(item.task.message._uiComponent.root.childNodes.length===0){
+          continue;
+        }
         try {
           await item.promise()
           console.debug(
@@ -512,7 +535,12 @@
 
   unsendThreadMessagesButton.addEventListener('click', async () => {
     console.log('unsendThreadMessagesButton click')
-    await new UnsendThreadMessagesBatchStrategy(localStorage.getItem('IDMU_BATCH_SIZE') || 1).run()
+    const threads = await loadMessageThreads();
+    console.log("Loaded threads:", threads.length)
+    for(var i=0;i<threads.length; i++){
+      await selectMessageThread(threads[i])
+		  await new UnsendThreadMessagesBatchStrategy(localStorage.getItem("IDMU_BATCH_SIZE") || 1).run();
+    }
     alert('IDMU: Finished')
   })
 
